@@ -1,16 +1,37 @@
 ---
 driver:
-  name: docker
+  name: vagrant
 
-docker:
-  containers:
-      - name: postgresql-centos6
-        image: centos
-        image_version: 6
+ansible:
+  # Use Ansible groups to parameterise the test instances.
+  host_vars:
+    host_1:
+      - var1: true
+        var2: true
+    host_2:
+      - var1: false
+        var2: true
 
-      - name: postgresql-centos7
-        image: centos
-        image_version: 7
+vagrant:
+  raw_config_args:
+    - "ssh.insert_key = false"
+
+  platforms:
+    - name: centos6
+      box: centos/6
+    - name: centos7
+      box: centos/7
+
+  providers:
+    - name: libvirt
+      type: libvirt
+      options:
+        memory: 512
+        driver: kvm
+
+  instances:
+    - name: host_1
+    - name: host_2
 
 verifier:
   name: testinfra

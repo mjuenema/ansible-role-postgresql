@@ -1,9 +1,37 @@
 ---
 - hosts: all
-  serial: 1
-  pre_tasks:
-  - name: Fix /etc/sudoers to allow sudo without tty
-    lineinfile: regexp="^\s*\w+\s+requiretty" dest=/etc/sudoers state=absent
-
+  serial: "100%"
+  vars:
+    postgresql_version: 9.5
+    postgresql_encoding: 'UTF-8'
+    postgresql_locale: 'en_US.UTF-8'
+    postgresql_ctype: 'en_US.UTF-8'
+    postgresql_admin_user: "postgres"
+    postgresql_default_auth_method: "trust"
+    postgresql_service_enabled: true
+    postgresql_cluster_name: "main"
+    postgresql_cluster_reset: false
+    postgresql_ext_install_contrib: yes
+    postgresql_ext_install_dev_headers: yes
+    postgresql_ext_install_postgis: yes
+    postgresql_ext_postgis_version: "2.2"
+    postgresql_pgtune: no
+    postgresql_databases:
+      - name: foobar
+        owner: baz                     # optional; specify the owner of the database
+    postgresql_database_extensions:
+      - db: foobar
+        extensions:
+          - hstore
+          - postgis
+    postgresql_users:
+      - name: baz
+        pass: pass
+        encrypted: no                  # denotes if the password is already encrypted.
+    postgresql_user_privileges:
+      - name: baz                      # user name
+        db: foobar                     # database
+        priv: "ALL"                    # privilege string format: example: INSERT,UPDATE/table:SELECT/anothertable:ALL
+        role_attr_flags: "CREATEDB"    # role attribute flags
   roles:
     - role: postgresql

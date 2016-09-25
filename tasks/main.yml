@@ -4,7 +4,9 @@
   with_first_found:
     - "../vars/{{ ansible_os_family }}.yml"
     - "../vars/empty.yml"
-  tags: [always]
+  tags:
+    - always
+    - skip_ansible_lint
 
 - include: install.yml
   when: ansible_pkg_mgr == "apt"

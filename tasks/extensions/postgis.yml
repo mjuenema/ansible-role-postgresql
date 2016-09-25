@@ -14,6 +14,12 @@
     - restart postgresql
   when: ansible_os_family == "Debian"
 
+- name: PostgreSQL | Extensions | Add the EPEL repository | RedHat
+  yum:
+    name: epel-release
+    state: present
+  when: ansible_os_family == "RedHat"
+
 - name: PostgreSQL | Extensions | Make sure the postgis extensions are installed | RedHat
   yum:
     name: "{{item}}"

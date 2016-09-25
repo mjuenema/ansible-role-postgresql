@@ -1,0 +1,2 @@
+postgresql-centos6 connection=docker
+postgresql-centos7 connection=docker

@@ -1,0 +1,13 @@
+---
+converged: null
+created: true
+customconf: true
+default_platform: null
+default_provider: null
+driver: docker
+hosts:
+  postgresql-centos6:
+    groups: []
+  postgresql-centos7:
+    groups: []
+multiple_platforms: null

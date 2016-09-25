@@ -1,0 +1,9 @@
+---
+- hosts: all
+  serial: 1
+  pre_tasks:
+  - name: Fix /etc/sudoers to allow sudo without tty
+    lineinfile: regexp="^\s*\w+\s+requiretty" dest=/etc/sudoers state=absent
+
+  roles:
+    - role: postgresql

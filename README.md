@@ -1,7 +1,12 @@
-## ANXS - PostgreSQL [![Build Status](https://travis-ci.org/ANXS/postgresql.png?branch=master)](https://travis-ci.org/ANXS/postgresql)
+## mjuenema/ansible-role-postgresql
 
 Ansible role which installs and configures PostgreSQL, extensions, databases and users.
 
+This is a fork of the fantastic [ANXS/postgresql](https://github.com/ANXS/postgresql) but I made several changes that most likely won't be accepted back into the original project.
+
+* Added support for testing with [Molecule](http://molecule.readthedocs.io/)
+* Added installation of PostGIS development files.
+* Added ```Makefile``` for running [Molecule](http://molecule.readthedocs.io/) tests (see below for details).
 
 #### Installation
 
@@ -10,7 +15,7 @@ This has been tested on Ansible 1.9.4 and higher.
 To install:
 
 ```
-ansible-galaxy install ANXS.postgresql
+ansible-galaxy install https://github.com/mjuenema/ansible-role-postgresql mjuenema.postgresql
 ```
 
 #### Dependencies
@@ -72,27 +77,45 @@ There's a lot more knobs and bolts to set, which you can find in the defaults/ma
 
 
 #### Testing
-This project comes with a Vagrantfile, this is a fast and easy way to test changes to the role, fire it up with `vagrant up`
 
-See [vagrant docs](https://docs.vagrantup.com/v2/) for getting setup with vagrant
+The included ```Makefile``` provides a wrapper around the [Molecule](http://molecule.readthedocs.io/) controlled tests.
 
-Once your VM is up, you can reprovision it using either `vagrant provision`, or `ansible-playbook tests/playbook.yml -i vagrant-inventory`
+```
+make
+make molecule_tests		         - Run Molecule test against all platforms
+make molecule_test_centos6	   - Run Molecule test against CentOS 6
+make molecule_test_centos7	   - Run Molecule test against CentOS 7
+make molecule_test_precise32	 - Run Molecule test against Ubuntu 12.04 (precise) 32-bit
+make molecule_test_precise64	 - Run Molecule test against Ubuntu 12.04 (precise) 64-bit
+make molecule_test_trusty32	   - Run Molecule test against Ubuntu 14.04 (trusty) 32-bit
+make molecule_test_trusty64	   - Run Molecule test against Ubuntu 14.04 (trusty) 64-bit
+make molecule_test_xenial	     - Run Molecule test against Ubuntu 16.04 (xenial)
+make molecule_test_wheezy	     - Run Molecule test against Debian 7 (wheezy) 64-bit
+make molecule_test_jessie	     - Run Molecule test against Debian 8 (jessie) 64-bit
+make molecule_destroy		       - Destroy all test machines
+```
 
-If you want to toy with the test play, see [tests/playbook.yml](./tests/playbook.yml), and change the variables in [tests/vars.yml](./tests/vars.yml)
+Currently the following PostgreSQL versions and Linux distributions are supported.
 
-If you are contributing, please first test your changes within the vagrant environment, (using the targeted distribution), and if possible, ensure your change is covered in the tests found in [.travis.yml](./.travis.yml)
+|                               | 8.4 | 9.0 | 9.1 | 9.2 | 9.3 | 9.4 | 9.5 |
+|-------------------------------|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| CentOS 6                      |     |     |     |     |     |     |     |
+| CentOS 7                      |     |     |     |     |     |     |     |
+| Ubuntu 12.04 (precise) 32-bit |     |     |     |     |     |     |     |
+| Ubuntu 12.04 (precise) 64-bit |     |     |     |     |     |     |     |
+| Ubuntu 14.04 (trusty) 32-bit  |     |     |     |     |     |     |     |
+| Ubuntu 14.04 (trusty) 64-bit  |     |     |     |     |     |     |     |
+| Debian 7 (wheezy) 64-bit      |     |     |     |     |     |     |     |
+| Debian 8 (jessie) 64-bit      |     |     |     |     |     |     |     |
 
 #### License
 
 Licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
-
 #### Thanks
 
-To the contributors:
-- [Ralph von der Heyden](https://github.com/ralph)
-
+A big thanks to the original project [ANXS/postgresql](https://github.com/ANXS/postgresql).
 
 #### Feedback, bug-reports, requests, ...
 
-Are [welcome](https://github.com/ANXS/postgresql/issues)!
+Are [welcome](https://github.com/mjuenema/ansible-role-postgresql/issues)!

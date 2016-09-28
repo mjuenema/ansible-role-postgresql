@@ -101,14 +101,16 @@ Currently the following PostgreSQL versions and Linux distributions are supporte
 |-------------------------------|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | CentOS 6                      |yes  |yes  |yes  |yes  |yes  |yes  |yes  |
 | CentOS 7                      |yes  |yes  |yes  |yes  |yes  |yes  |yes  |
-| Ubuntu 12.04 (precise) 32-bit |no   |no   |no   |no   |no   |no   |no   |
-| Ubuntu 12.04 (precise) 64-bit |no   |no   |no   |no   |no   |no   |no   |
+| Ubuntu 12.04 (precise) 32-bit |(1)  |(1)  |(1)  |(1)  |(1)  |(1)  |(1)  |
+| Ubuntu 12.04 (precise) 64-bit |(1)  |(1)  |(1)  |(1)  |(1)  |(1)  |(1)  |
 | Ubuntu 14.04 (trusty) 32-bit  |yes  |yes  |yes  |yes  |yes  |yes  |yes  |
 | Ubuntu 14.04 (trusty) 64-bit  |yes  |yes  |yes  |yes  |yes  |yes  |yes  |
-| Debian 7 (wheezy) 64-bit      |no   |no   |no   |no   |no   |no   |no   |
+| Debian 7 (wheezy) 64-bit      |(1)  |(1)  |(1)  |(1)  |(1)  |(1)  |(1)  |
 | Debian 8 (jessie) 64-bit      |yes  |yes  |yes  |yes  |yes  |yes  |yes  |
 
-The Ubuntu 12.04 and Debian 7 tests currently fail because of the following Ansible error.
+(1) The Ubuntu 12.04 and Debian 7 tests currently fail with Ansible 2.1.* because of 
+the following error. Apparently this is a known bug. Ansible versions prior to
+2.1.* work fine.
 ```
 "Failed to set permissions on the temporary files Ansible needs to create 
 when becoming an unprivileged user. For information on working around this, 
@@ -126,3 +128,7 @@ A big thanks to the original project [ANXS/postgresql](https://github.com/ANXS/p
 #### Feedback, bug-reports, requests, ...
 
 Are [welcome](https://github.com/mjuenema/ansible-role-postgresql/issues)!
+
+See also [upstream issues](https://github.com/ANXS/postgresql/issues).
+
+

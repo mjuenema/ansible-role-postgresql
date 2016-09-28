@@ -17,6 +17,7 @@ help:
 	@echo "make molecule_test_wheezy	- Run Molecule test against Debian 7 (wheezy) 64-bit"
 	@echo "make molecule_test_jessie	- Run Molecule test against Debian 8 (jessie) 64-bit"
 	@echo "make molecule_destroy		- Destroy all test machines"
+	@echo "make molecule_clean		- Cleanup the .molecule folder"
 
 
 molecule_test_all: molecule_test_centos6 molecule_test_centos7 \
@@ -26,26 +27,30 @@ molecule_test_all: molecule_test_centos6 molecule_test_centos7 \
 molecule_destroy:
 	molecule destroy
 
-molecule_test_centos6:
+# Need to destroy any running machines first
+molecule_clean: molecule_destroy
+	rm -rfv .molecule
+
+molecule_test_centos6: molecule_clean
 	molecule test --driver=$(DRIVER) --provider=$(PROVIDER) --platform=centos-6
 
-molecule_test_centos7:
+molecule_test_centos7: molecule_clean
 	molecule test --driver=$(DRIVER) --provider=$(PROVIDER) --platform=centos-7
 
-molecule_test_trusty32:
+molecule_test_trusty32: molecule_clean
 	molecule test --driver=$(DRIVER) --provider=$(PROVIDER) --platform=ubuntu-trusty32
 
-molecule_test_trusty64:
+molecule_test_trusty64: molecule_clean
 	molecule test --driver=$(DRIVER) --provider=$(PROVIDER) --platform=ubuntu-trusty64
 
-molecule_test_precise32:
+molecule_test_precise32: molecule_clean
 	molecule test --driver=$(DRIVER) --provider=$(PROVIDER) --platform=ubuntu-precise32
 
-molecule_test_precise64:
+molecule_test_precise64: molecule_clean
 	molecule test --driver=$(DRIVER) --provider=$(PROVIDER) --platform=ubuntu-precise64
 
-molecule_test_wheezy:
+molecule_test_wheezy: molecule_clean
 	molecule test --driver=$(DRIVER) --provider=$(PROVIDER) --platform=debian-wheezy
 
-molecule_test_jessie:
+molecule_test_jessie: molecule_clean
 	molecule test --driver=$(DRIVER) --provider=$(PROVIDER) --platform=debian-jessie

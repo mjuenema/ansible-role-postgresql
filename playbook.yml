@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  serial: "100%"
+  serial: 1
   vars:
     postgresql_version: 9.5
     postgresql_encoding: 'UTF-8'

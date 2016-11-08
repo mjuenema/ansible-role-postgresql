@@ -19,6 +19,14 @@ install:
   - pip install testinfra
   - pip install docker-py
   - pip install molecule
+  - pip install ansible-lint
 
 script:
-  - molecule test
+  - ansible-lint -v playbook.yml
+  - molecule create
+  - molecule converge
+  - molecule idempotence
+  - molecule verify
+
+after_script:
+  - molecule destroy

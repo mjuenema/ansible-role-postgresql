@@ -41,6 +41,3 @@ script:
   - travis_fold:start:script.verify
   - molecule verify
   - travis_fold:end:script.verify
-
-after_script:
-  - molecule destroy

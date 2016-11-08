@@ -16,6 +16,8 @@ before_install:
   - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-engine
 
 install:
+  - pip install testinfra
+  - pip install docker-py
   - pip install molecule
 
 script:

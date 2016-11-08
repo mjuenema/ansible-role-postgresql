@@ -1,78 +1,69 @@
 ---
-driver:
-  name: vagrant
-
 ansible:
-  verbose: false
-  # Parameterise the test instances
-#  host_vars:
-#    ansible-role-postgresql95:
-#      - postgresql_version: 9.5
-#    ansible-role-postgresql94:
-#      - postgresql_version: 9.4
-#    ansible-role-postgresql93:
-#      - postgresql_version: 9.3
-#    ansible-role-postgresql92:
-#      - postgresql_version: 9.2
-#    ansible-role-postgresql91:
-#      - postgresql_version: 9.1
-#    ansible-role-postgresql90:
-#      - postgresql_version: 9.0
-#    ansible-role-postgresql84:
-#      - postgresql_version: 8.4
-
-vagrant:
-  raw_config_args:
-    - "ssh.insert_key = false"
-
-
-  platforms:
-    - name: centos-6
-      box: centos/6
-    - name: centos-7
-      box: centos/7
-#    - name: ubuntu-xenial
-#      box: ubuntu/xenial
-    - name: ubuntu-trusty32
-      box: ubuntu/trusty32
-    - name: ubuntu-trusty64
-      box: ubuntu/trusty64
-    - name: ubuntu-precise32
-      box: ubuntu/precise32
-    - name: ubuntu-precise64
-      box: ubuntu/precise64
-    - name: debian-jessie
-      box: debian/jessie64
-    - name: debian-wheezy
-      box: debian/wheezy64
-
-  providers:
-
-    # Note: libvirt does only work with the following platforms:
-    #       - centos-6
-    #       - centos-7
+  group_vars:
+    pg91:
+      - postgresql_version: 9.1
+    pg92:
+      - postgresql_version: 9.2
+    pg93:
+      - postgresql_version: 9.3
+    pg94:
+      - postgresql_version: 9.4
+driver:
+  name: docker
+docker:
+  containers:
     #
-    - name: libvirt
-      type: libvirt
-      options:
-        memory: 512
-        driver: kvm
-
-    - name: virtualbox
-      type: virtualbox
-      options:
-        memory: 512
-      raw_config_args:
-        - "customize \"post-boot\",[\"controlvm\", :id, \"setlinkstate1\", \"on\"]"
-
-  instances:
-#    - name: pg95
-#    - name: pg94
-#    - name: pg93
-#    - name: pg92
-#    - name: pg91
-    - name: ansible-role-postgresql90
-#    - name: pg84
-
+    # Ubuntu - PostgreSQL 9.1
+    #
+    - name: ansible-role-postgresql-ubuntu-1604-pg91
+      image: ubuntu
+      image_version: '16.04'
+      ansible_groups:
+        - pg91
+    - name: ansible-role-postgresql-ubuntu-1404-pg91
+      image: ubuntu
+      image_version: '14.04'
+      ansible_groups:
+        - pg91
+    #
+    # Ubuntu - PostgreSQL 9.2
+    #
+    - name: ansible-role-postgresql-ubuntu-1604-pg92
+      image: ubuntu
+      image_version: '16.04'
+      ansible_groups:
+        - pg92
+    - name: ansible-role-postgresql-ubuntu-1404-pg92
+      image: ubuntu
+      image_version: '14.04'
+      ansible_groups:
+        - pg92
+    #
+    # Ubuntu - PostgreSQL 9.3
+    #
+    - name: ansible-role-postgresql-ubuntu-1604-pg93
+      image: ubuntu
+      image_version: '16.04'
+      ansible_groups:
+        - pg93
+    - name: ansible-role-postgresql-ubuntu-1404-pg93
+      image: ubuntu
+      image_version: '14.04'
+      ansible_groups:
+        - pg93
+    #
+    # Ubuntu - PostgreSQL 9.4
+    #
+    - name: ansible-role-postgresql-ubuntu-1604-pg94
+      image: ubuntu
+      image_version: '16.04'
+      ansible_groups:
+        - pg94
+    - name: ansible-role-postgresql-ubuntu-1404-pg94
+      image: ubuntu
+      image_version: '14.04'
+      ansible_groups:
+        - pg94
 verifier:
   name: testinfra

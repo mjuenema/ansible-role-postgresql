@@ -22,22 +22,9 @@ install:
   - pip install ansible-lint
 
 script:
-  # See https://github.com/travis-ci/travis-ci/issues/1065 for folding
-  - echo -en travis_fold:start:script.syntax
   - molecule syntax
-  - echo -en travis_fold:end:script.syntax
-  - echo -en travis_fold:start:script.create 
   - molecule create
-  - echo -en travis_fold:end:script.create
-  - echo -en travis_fold:start:script.status
   - molecule status
-  - echo -en travis_fold:end:script.status
-  - echo -en travis_fold:start:script.converge
   - molecule converge
-  - echo -en travis_fold:end:script.converge
-  - echo -en travis_fold:start:script.idempotence
   - molecule idempotence
-  - echo -en travis_fold:end:script.idempotence
-  - echo -en travis_fold:start:script.verify
   - molecule verify
-  - echo -en travis_fold:end:script.verify

@@ -127,5 +127,21 @@ docker:
       image_version: '6'
       ansible_groups:
         - pg94
+    #
+    # CentOS - PostgreSQ: 9.5
+    #
+    - name: ansible-role-postgresql-centos-6-pg95
+      image: centos
+      image_version: '6'
+      ansible_groups:
+        - pg95
+    #
+    # CentOS - PostgreSQ: 9.6
+    #
+    - name: ansible-role-postgresql-centos-6-pg96
+      image: centos
+      image_version: '6'
+      ansible_groups:
+        - pg96
 verifier:
   name: testinfra

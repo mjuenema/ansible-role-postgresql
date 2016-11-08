@@ -683,7 +683,7 @@ postgresql_pgdg_dists:
 postgresql_version_terse: "{{ postgresql_version | replace('.', '') }}"
 postgresql_yum_repository_base_url: "http://yum.postgresql.org"
 # Map distributions to the release number of the pgdg package (https://yum.postgresql.org/repopackages.ph)
-postgresql_pgdg_releases:
+postgresql_pgdg_release_map:
   RedHat:
     6:
       96: 3
@@ -744,5 +744,5 @@ postgresql_pgdg_releases:
       93: 3
       #92: not supported
       #91: not supported
-postgresql_pgdg_release: "{{ postgresql_pgdg_release[ansible_distribution][ ansible_distribution_major_version][postgresql_version_terse] }}"
+postgresql_pgdg_release: "{{ postgresql_pgdg_release_map[ansible_distribution][ansible_distribution_major_version][postgresql_version_terse] }}"
 postgresql_yum_repository_url: "{{ postgresql_yum_repository_base_url }}/{{ postgresql_version }}/{{ ansible_os_family | lower }}/rhel-{{ ansible_distribution_major_version }}-{{ ansible_architecture }}/pgdg-{{ postgresql_pgdg_dists[ansible_distribution] }}{{ postgresql_version_terse }}-{{ postgresql_version }}-{{ postgresql_pgdg_release }}.noarch.rpm"

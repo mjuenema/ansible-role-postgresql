@@ -23,21 +23,21 @@ install:
 
 script:
   # See https://github.com/travis-ci/travis-ci/issues/1065 for folding
-  - travis_fold:start:script.syntax
+  - echo -en travis_fold:start:script.syntax
   - molecule syntax
-  - travis_fold:end:script.syntax
-  - travis_fold:start:script.create 
+  - echo -en travis_fold:end:script.syntax
+  - echo -en travis_fold:start:script.create 
   - molecule create
-  - travis_fold:end:script.create
-  - travis_fold:start:script.status
+  - echo -en travis_fold:end:script.create
+  - echo -en travis_fold:start:script.status
   - molecule status
-  - travis_fold:end:script.status
-  - travis_fold:start:script.converge
+  - echo -en travis_fold:end:script.status
+  - echo -en travis_fold:start:script.converge
   - molecule converge
-  - travis_fold:end:script.converge
-  - travis_fold:start:script.idempotence
+  - echo -en travis_fold:end:script.converge
+  - echo -en travis_fold:start:script.idempotence
   - molecule idempotence
-  - travis_fold:end:script.idempotence
-  - travis_fold:start:script.verify
+  - echo -en travis_fold:end:script.idempotence
+  - echo -en travis_fold:start:script.verify
   - molecule verify
-  - travis_fold:end:script.verify
+  - echo -en travis_fold:end:script.verify

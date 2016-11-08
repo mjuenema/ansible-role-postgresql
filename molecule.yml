@@ -1,5 +1,6 @@
 ---
 ansible:
+  verbose: 'vvvv'
   group_vars:
     pg91:
       - postgresql_version: 9.1
@@ -11,8 +12,8 @@ ansible:
       - postgresql_version: 9.4
     pg95:
       - postgresql_version: 9.5
-    pg96:
-      - postgresql_version: 9.6
+#    pg96:
+#      - postgresql_version: 9.6
 driver:
   name: docker
 docker:
@@ -82,19 +83,19 @@ docker:
       image_version: '14.04'
       ansible_groups:
         - pg95
-    #
-    # Ubuntu - PostgreSQL 9.6
-    #
-    - name: ansible-role-postgresql-ubuntu-1604-pg96
-      image: ubuntu
-      image_version: '16.04'
-      ansible_groups:
-        - pg95
-    - name: ansible-role-postgresql-ubuntu-1404-pg96
-      image: ubuntu
-      image_version: '14.04'
-      ansible_groups:
-        - pg96
+#    #
+#    # Ubuntu - PostgreSQL 9.6
+#    #
+#    - name: ansible-role-postgresql-ubuntu-1604-pg96
+#      image: ubuntu
+#      image_version: '16.04'
+#      ansible_groups:
+#        - pg96
+#    - name: ansible-role-postgresql-ubuntu-1404-pg96
+#      image: ubuntu
+#      image_version: '14.04'
+#      ansible_groups:
+#        - pg96
     #
     # CentOS - PostgreSQ: 9.1
     #
@@ -135,13 +136,13 @@ docker:
       image_version: '6'
       ansible_groups:
         - pg95
-    #
-    # CentOS - PostgreSQ: 9.6
-    #
-    - name: ansible-role-postgresql-centos-6-pg96
-      image: centos
-      image_version: '6'
-      ansible_groups:
-        - pg96
+#    #
+#    # CentOS - PostgreSQ: 9.6
+#    #
+#    - name: ansible-role-postgresql-centos-6-pg96
+#      image: centos
+#      image_version: '6'
+#      ansible_groups:
+#        - pg96
 verifier:
   name: testinfra

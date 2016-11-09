@@ -3,9 +3,6 @@ ansible:
   verbose: 'vvvv'
   group_vars:
     all:
-      postgresql_database_extensions_list:
-        - hstore
-        - citext
       postgresql_databases:
         - name: dbname1
           owner: dbowner1

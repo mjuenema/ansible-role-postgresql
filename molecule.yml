@@ -2,6 +2,20 @@
 ansible:
   verbose: 'vvvv'
   group_vars:
+    all:
+      postgresql_database_extensions_list:
+        - hstore
+        - citext
+      postgresql_databases:
+        - name: dbname1
+          owner: dbowner1
+        - name: dbname2
+          owner: dbowner2
+      postgresql_database_extensions:
+        - db: dbname1
+          extensions: postgresql_database_extensions_list
+        - db: dbname2
+          extensions: postgresql_database_extensions_list
     pg91:
       - postgresql_version: 9.1
     pg92:
@@ -26,11 +40,13 @@ docker:
       image_version: '16.04'
       ansible_groups:
         - pg91
+        - all
     - name: ansible-role-postgresql-ubuntu-1404-pg91
       image: ubuntu
       image_version: '14.04'
       ansible_groups:
         - pg91
+        - all
     #
     # Ubuntu - PostgreSQL 9.2
     #
@@ -39,11 +55,13 @@ docker:
       image_version: '16.04'
       ansible_groups:
         - pg92
+        - all
     - name: ansible-role-postgresql-ubuntu-1404-pg92
       image: ubuntu
       image_version: '14.04'
       ansible_groups:
         - pg92
+        - all
     #
     # Ubuntu - PostgreSQL 9.3
     #
@@ -52,11 +70,13 @@ docker:
       image_version: '16.04'
       ansible_groups:
         - pg93
+        - all
     - name: ansible-role-postgresql-ubuntu-1404-pg93
       image: ubuntu
       image_version: '14.04'
       ansible_groups:
         - pg93
+        - all
     #
     # Ubuntu - PostgreSQL 9.4
     #
@@ -65,11 +85,13 @@ docker:
       image_version: '16.04'
       ansible_groups:
         - pg94
+        - all
     - name: ansible-role-postgresql-ubuntu-1404-pg94
       image: ubuntu
       image_version: '14.04'
       ansible_groups:
         - pg94
+        - all
     #
     # Ubuntu - PostgreSQL 9.5
     #
@@ -78,11 +100,13 @@ docker:
       image_version: '16.04'
       ansible_groups:
         - pg95
+        - all
     - name: ansible-role-postgresql-ubuntu-1404-pg95
       image: ubuntu
       image_version: '14.04'
       ansible_groups:
         - pg95
+        - all
 #    #
 #    # Ubuntu - PostgreSQL 9.6
 #    #
@@ -96,6 +120,7 @@ docker:
 #      image_version: '14.04'
 #      ansible_groups:
 #        - pg96
+#        - all
     #
     # CentOS - PostgreSQ: 9.1
     #
@@ -104,6 +129,7 @@ docker:
       image_version: '6'
       ansible_groups:
         - pg91
+        - all
     #
     # CentOS - PostgreSQ: 9.2
     #
@@ -112,6 +138,7 @@ docker:
       image_version: '6'
       ansible_groups:
         - pg92
+        - all
     #
     # CentOS - PostgreSQ: 9.3
     #
@@ -120,6 +147,7 @@ docker:
       image_version: '6'
       ansible_groups:
         - pg93
+        - all
     #
     # CentOS - PostgreSQ: 9.4
     #
@@ -128,6 +156,7 @@ docker:
       image_version: '6'
       ansible_groups:
         - pg94
+        - all
     #
     # CentOS - PostgreSQ: 9.5
     #
@@ -136,6 +165,7 @@ docker:
       image_version: '6'
       ansible_groups:
         - pg95
+        - all
 #    #
 #    # CentOS - PostgreSQ: 9.6
 #    #
@@ -144,5 +174,6 @@ docker:
 #      image_version: '6'
 #      ansible_groups:
 #        - pg96
+#        - all
 verifier:
   name: testinfra

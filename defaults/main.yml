@@ -682,4 +682,67 @@ postgresql_pgdg_dists:
   OracleLinux: oraclelinux
 postgresql_version_terse: "{{ postgresql_version | replace('.', '') }}"
 postgresql_yum_repository_base_url: "http://yum.postgresql.org"
-postgresql_yum_repository_url: "{{ postgresql_yum_repository_base_url }}/{{ postgresql_version }}/{{ ansible_os_family | lower }}/rhel-{{ ansible_distribution_major_version }}-{{ ansible_architecture }}/pgdg-{{ postgresql_pgdg_dists[ansible_distribution] }}{{ postgresql_version_terse }}-{{ postgresql_version }}-2.noarch.rpm"
+# Map distributions to the release number of the pgdg package (https://yum.postgresql.org/repopackages.ph)
+postgresql_pgdg_release_map:
+  RedHat:
+    6:
+      96: 3
+      95: 3
+      94: 3
+      93: 3
+      92: 9
+      91: 7
+    7:
+      96: 3
+      95: 3
+      94: 3
+      93: 3
+      92: 3
+      #91: not supported
+  Scientific:
+    6:
+      96: 3
+      95: 3
+      94: 3
+      93: 3
+      92: 9
+      91: 8
+    7:
+      96: 3
+      95: 3
+      94: 3
+      93: 3
+      92: 3
+      #91: not supported
+  CentOS:
+    6:
+      96: 3
+      95: 3
+      94: 3
+      93: 3
+      92: 8
+      91: 6
+    7:
+      96: 3
+      95: 3
+      94: 3
+      93: 3
+      92: 3
+      #91: not supported
+  OracleLinux:
+    6:
+      96: 3
+      95: 3
+      94: 3
+      93: 3
+      92: 9
+      91: 7
+    7:
+      96: 3
+      95: 3
+      94: 3
+      93: 3
+      #92: not supported
+      #91: not supported
+postgresql_pgdg_release: "{{ postgresql_pgdg_release_map[ansible_distribution][ansible_distribution_major_version|int][postgresql_version_terse|int] }}"
+postgresql_yum_repository_url: "{{ postgresql_yum_repository_base_url }}/{{ postgresql_version }}/{{ ansible_os_family | lower }}/rhel-{{ ansible_distribution_major_version }}-{{ ansible_architecture }}/pgdg-{{ postgresql_pgdg_dists[ansible_distribution] }}{{ postgresql_version_terse }}-{{ postgresql_version }}-{{ postgresql_pgdg_release }}.noarch.rpm"

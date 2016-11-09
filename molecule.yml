@@ -2,12 +2,12 @@
 ansible:
   verbose: 'vvvv'
   group_vars:
-    shared:
-      postgresql_databases:
-        - name: dbname1
-          owner: dbowner1
-        - name: dbname2
-          owner: dbowner2
+    # shared:
+    #   postgresql_databases:
+    #     - name: dbname1
+    #       owner: dbowner1
+    #     - name: dbname2
+    #       owner: dbowner2
 #      postgresql_database_extensions:
 #        - db: dbname1
 #          extensions: postgresql_database_extensions_list

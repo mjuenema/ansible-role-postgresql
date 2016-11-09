@@ -11,11 +11,11 @@ ansible:
           owner: dbowner1
         - name: dbname2
           owner: dbowner2
-      postgresql_database_extensions:
-        - db: dbname1
-          extensions: postgresql_database_extensions_list
-        - db: dbname2
-          extensions: postgresql_database_extensions_list
+#      postgresql_database_extensions:
+#        - db: dbname1
+#          extensions: postgresql_database_extensions_list
+#        - db: dbname2
+#          extensions: postgresql_database_extensions_list
     pg91:
       - postgresql_version: 9.1
     pg92:

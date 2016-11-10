@@ -155,8 +155,7 @@ docker:
         - pg92
         - shared
     - name: ansible-role-postgresql-centos-7-pg92
-      build_image: true
-      dockerfile: tests/Dockerfile-centos7
+      image: mjuenema/centos7
       ansible_groups:
         - pg92
         - shared          

@@ -2,17 +2,17 @@
 ansible:
   verbose: 'vvvv'
   group_vars:
-    # shared:
-    #   postgresql_databases:
-    #     - name: dbname1
-    #       owner: dbowner1
-    #     - name: dbname2
-    #       owner: dbowner2
-#      postgresql_database_extensions:
-#        - db: dbname1
-#          extensions: postgresql_database_extensions_list
-#        - db: dbname2
-#          extensions: postgresql_database_extensions_list
+    shared:
+      - postgresql_databases:
+          - name: dbname1
+            owner: dbowner1
+          - name: dbname2
+            owner: dbowner2
+      - postgresql_database_extensions:
+          - db: dbname1
+            extensions: postgresql_database_extensions_list
+          - db: dbname2
+            extensions: postgresql_database_extensions_list
     pg91:
       - postgresql_version: 9.1
     pg92:
@@ -37,7 +37,7 @@ docker:
       image_version: '16.04'
       ansible_groups:
         - pg91
-       #- shared
+        - shared
     - name: ansible-role-postgresql-ubuntu-1404-pg91
       image: ubuntu
       image_version: '14.04'

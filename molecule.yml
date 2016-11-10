@@ -138,12 +138,8 @@ docker:
       ansible_groups:
         - pg91
         - shared
-    - name: ansible-role-postgresql-centos-7-pg91
-      image: centos
-      image_version: '7'
-      ansible_groups:
-        - pg91
-        - shared      
+    #
+    #  centos-7-pg91 is not supported
     #
     # CentOS - PostgreSQ: 9.2
     #
@@ -153,6 +149,12 @@ docker:
       ansible_groups:
         - pg92
         - shared
+    - name: ansible-role-postgresql-centos-7-pg92
+      image: centos
+      image_version: '7'
+      ansible_groups:
+        - pg92
+        - shared          
     #
     # CentOS - PostgreSQ: 9.3
     #

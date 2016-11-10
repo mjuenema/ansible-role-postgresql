@@ -3,6 +3,13 @@ ansible:
   verbose: 'vvvv'
   group_vars:
     shared:
+      - postgresql_users:
+          - name: dbowner1
+            pass: pass
+            encrypted: no
+          - name: dbowner2
+            pass: pass
+            encrypted: no
       - postgresql_databases:
           - name: dbname1
             owner: dbowner1

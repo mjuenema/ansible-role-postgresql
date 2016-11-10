@@ -13,6 +13,10 @@ ansible:
             extensions: postgresql_database_extensions_list
           - db: dbname2
             extensions: postgresql_database_extensions_list
+      - postgresql_ext_install_contrib: true
+      - postgresql_ext_install_dev_headers: true
+      - postgresql_ext_install_postgis: true
+      - postgresql_ext_postgis_version: "2.1"
     pg91:
       - postgresql_version: 9.1
     pg92:

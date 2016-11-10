@@ -3,6 +3,9 @@ ansible:
   verbose: 'vvvv'
   group_vars:
     shared:
+      - postgresql_database_extensions_list:
+          - hstore
+          - citext
       - postgresql_users:
           - name: dbowner1
             pass: pass

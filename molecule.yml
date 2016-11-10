@@ -20,7 +20,6 @@ ansible:
             extensions:
               - hstore
               - citext
-          - db: dbname2
       - postgresql_ext_install_contrib: true
       - postgresql_ext_install_dev_headers: true
       - postgresql_ext_install_postgis: true
@@ -79,7 +78,7 @@ docker:
       image_version: '16.04'
       ansible_groups:
         - pg93
-       - shared
+        - shared
     - name: ansible-role-postgresql-ubuntu-1404-pg93
       image: ubuntu
       image_version: '14.04'
@@ -94,7 +93,7 @@ docker:
       image_version: '16.04'
       ansible_groups:
         - pg94
-       - shared
+        - shared
     - name: ansible-role-postgresql-ubuntu-1404-pg94
       image: ubuntu
       image_version: '14.04'

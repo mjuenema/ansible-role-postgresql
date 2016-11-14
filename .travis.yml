@@ -29,7 +29,7 @@ install:
 before_script:
   - sed -e "s/IMAGE_NAME/${IMAGE_NAME}/g" \
         -e "s/IMAGE_VERSION/${IMAGE_VERSION/g" \
-        -e "s/ANSIBLE_GROUP/${ANSIBLE_GROUP}" \
+        -e "s/ANSIBLE_GROUP/${ANSIBLE_GROUP}/g" \
            molecule.yml.in > molecule.yml
 
 script:

@@ -45,6 +45,7 @@ docker:
     - name: ansible-role-postgresql
       image: IMAGE_NAME
       image_version: 'IMAGE_VERSION'
+      privileged: true
       ansible_groups:
         - ANSIBLE_GROUP
         - shared

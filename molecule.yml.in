@@ -42,7 +42,7 @@ driver:
 docker:
   containers:
     # IMAGE_NAME, IMAGE_VERSION and ANSIBLE_GROUP will be replaced by sed.
-    - name: ansible-role-postgresql-IMAGE_NAME-IMAGE_VERSION-ANSIBLE_GROUP
+    - name: ansible-role-postgresql
       image: IMAGE_NAME
       image_version: 'IMAGE_VERSION'
       ansible_groups:

@@ -42,6 +42,7 @@ before_install:
   - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-engine
 
 install:
+  - pip install jinja2-cli
   - pip install testinfra
   - pip install docker-py
   - pip install ansible
@@ -49,10 +50,10 @@ install:
   - pip install ansible-lint
 
 before_script:
-  - sed -e "s|IMAGE_NAME|${IMAGE_NAME}|g"
-        -e "s|IMAGE_VERSION|${IMAGE_VERSION}|g"
-        -e "s|ANSIBLE_GROUP|${ANSIBLE_GROUP}|g"
-           molecule.yml.in > molecule.yml
+  - echo '{}' | jinja2 -D IMAGE_NAME=${IMAGE_NAME}
+                       -D IMAGE_VERSION=${IMAGE_VERSION}
+                       -D ANSIBLE_GROUP=${ANSIBLE_GROUP} molecule.yml.j2
+                > molecule.yml
 
 script:
   # TODO: split into before_script, after_script, etc???

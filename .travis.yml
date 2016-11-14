@@ -8,6 +8,11 @@ sudo: required
 
 language: python
 
+env:
+  matrix:
+    - IMAGE_NAME=ubuntu IMAGE_VERSION=16.04 ANSIBLE_GROUP=pg91
+    - IMAGE_NAME=ubuntu IMAGE_VERSION=16.04 ANSIBLE_GROUP=pg92
+
 services:
   - docker
 
@@ -20,6 +25,12 @@ install:
   - pip install docker-py
   - pip install molecule
   - pip install ansible-lint
+
+before_script:
+  - sed -e "s/IMAGE_NAME/${IMAGE_NAME}/g" \
+        -e "s/IMAGE_VERSION/${IMAGE_VERSION/g" \
+        -e "s/ANSIBLE_GROUP/${ANSIBLE_GROUP}" \
+           molecule.yml.in > molecule.yml
 
 script:
   # TODO: split into before_script, after_script, etc???

@@ -28,7 +28,7 @@ env:
     - IMAGE_NAME=centos IMAGE_VERSION=6 ANSIBLE_GROUP=pg94
     - IMAGE_NAME=centos IMAGE_VERSION=6 ANSIBLE_GROUP=pg95
     #
-    - IMAGE_NAME=mjuenema/centos7 IMAGE_VERSION=latest ANSIBLE_GROUP=pg91
+    # not supported: IMAGE_NAME=mjuenema/centos7 IMAGE_VERSION=latest ANSIBLE_GROUP=pg91
     - IMAGE_NAME=mjuenema/centos7 IMAGE_VERSION=latest ANSIBLE_GROUP=pg92
     - IMAGE_NAME=mjuenema/centos7 IMAGE_VERSION=latest ANSIBLE_GROUP=pg93
     - IMAGE_NAME=mjuenema/centos7 IMAGE_VERSION=latest ANSIBLE_GROUP=pg94

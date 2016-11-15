@@ -1,4 +1,6 @@
 ---
 - hosts: all
+  vars:
+    postgresql_version: 9.2
   roles:
     - role: ansible-role-postgresql

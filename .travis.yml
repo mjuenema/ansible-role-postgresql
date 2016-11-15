@@ -8,6 +8,32 @@ sudo: required
 
 language: python
 
+env:
+  matrix:
+    - IMAGE_NAME=ubuntu IMAGE_VERSION=16.04 ANSIBLE_GROUP=pg91
+    - IMAGE_NAME=ubuntu IMAGE_VERSION=16.04 ANSIBLE_GROUP=pg92
+    - IMAGE_NAME=ubuntu IMAGE_VERSION=16.04 ANSIBLE_GROUP=pg93
+    - IMAGE_NAME=ubuntu IMAGE_VERSION=16.04 ANSIBLE_GROUP=pg94
+    - IMAGE_NAME=ubuntu IMAGE_VERSION=16.04 ANSIBLE_GROUP=pg95
+    #
+    - IMAGE_NAME=ubuntu IMAGE_VERSION=14.04 ANSIBLE_GROUP=pg91
+    - IMAGE_NAME=ubuntu IMAGE_VERSION=14.04 ANSIBLE_GROUP=pg92
+    - IMAGE_NAME=ubuntu IMAGE_VERSION=14.04 ANSIBLE_GROUP=pg93
+    - IMAGE_NAME=ubuntu IMAGE_VERSION=14.04 ANSIBLE_GROUP=pg94
+    - IMAGE_NAME=ubuntu IMAGE_VERSION=14.04 ANSIBLE_GROUP=pg95
+    #
+    - IMAGE_NAME=centos IMAGE_VERSION=6 ANSIBLE_GROUP=pg91
+    - IMAGE_NAME=centos IMAGE_VERSION=6 ANSIBLE_GROUP=pg92
+    - IMAGE_NAME=centos IMAGE_VERSION=6 ANSIBLE_GROUP=pg93
+    - IMAGE_NAME=centos IMAGE_VERSION=6 ANSIBLE_GROUP=pg94
+    - IMAGE_NAME=centos IMAGE_VERSION=6 ANSIBLE_GROUP=pg95
+    #
+    # not supported: IMAGE_NAME=mjuenema/centos7 IMAGE_VERSION=latest ANSIBLE_GROUP=pg91
+    - IMAGE_NAME=mjuenema/centos7 IMAGE_VERSION=latest ANSIBLE_GROUP=pg92
+    - IMAGE_NAME=mjuenema/centos7 IMAGE_VERSION=latest ANSIBLE_GROUP=pg93
+    - IMAGE_NAME=mjuenema/centos7 IMAGE_VERSION=latest ANSIBLE_GROUP=pg94
+    - IMAGE_NAME=mjuenema/centos7 IMAGE_VERSION=latest ANSIBLE_GROUP=pg95
+
 services:
   - docker
 
@@ -16,10 +42,18 @@ before_install:
   - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-engine
 
 install:
+  - pip install jinja2-cli
   - pip install testinfra
   - pip install docker-py
+  - pip install ansible
   - pip install molecule
   - pip install ansible-lint
+
+before_script:
+  - echo '{}' | jinja2 -D IMAGE_NAME=${IMAGE_NAME}
+                       -D IMAGE_VERSION=${IMAGE_VERSION}
+                       -D ANSIBLE_GROUP=${ANSIBLE_GROUP} molecule.yml.j2
+                > molecule.yml
 
 script:
   # TODO: split into before_script, after_script, etc???

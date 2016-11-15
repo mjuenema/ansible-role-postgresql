@@ -47,7 +47,7 @@ docker:
       image_version: '{{IMAGE_VERSION}}'
       {% if IMAGE_NAME in ['mjuenema/centos7'] -%}
       privileged: true
-      volume_mounts: 
+      volume_mounts:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
       {% endif -%}
       ansible_groups:

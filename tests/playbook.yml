@@ -1,0 +1,27 @@
+---
+# This playbook is used for tests without Molecule
+- hosts: all
+  vars:
+    postgresql_users:
+      - name: dbowner1
+        pass: pass
+        encrypted: no
+      - name: dbowner2
+        pass: pass
+        encrypted: no
+    postgresql_databases:
+      - name: dbname1
+        owner: dbowner1
+      - name: dbname2
+        owner: dbowner2
+    postgresql_database_extensions:
+      - db: dbname1
+        extensions:
+          - hstore
+          - citext
+    postgresql_ext_install_contrib: true
+    postgresql_ext_install_dev_headers: true
+    postgresql_ext_install_postgis: true
+    postgresql_ext_postgis_version: "2.1"
+  roles:
+    - role: ansible-role-postgresql

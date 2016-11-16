@@ -85,8 +85,9 @@ postgresql_port: 5432
 postgresql_max_connections: 100
 postgresql_superuser_reserved_connections: 3
 
-postgresql_unix_socket_directory: ''    # (<= 9.2)
-postgresql_unix_socket_directories:     # (>= 9.3)
+postgresql_unix_socket_directory: '/tmp'    # (<= 9.2)
+postgresql_unix_socket_directories:         # (>= 9.3)
+  - '/tmp'
   - "{{ postgresql_pid_directory }}"
 postgresql_unix_socket_group: ''
 postgresql_unix_socket_permissions: '0777' # begin with 0 to use octal notation
@@ -681,7 +682,9 @@ postgresql_pgdg_dists:
   SLC: sl
   OracleLinux: oraclelinux
 postgresql_version_terse: "{{ postgresql_version | replace('.', '') }}"
-postgresql_yum_repository_base_url: "http://yum.postgresql.org"
+#postgresql_yum_repository_base_url: "http://yum.postgresql.org"
+#http://download.postgresql.org/pub/repos/yum/9.3/redhat/rhel-7-x86_64/pgdg-centos93-9.3-3.noarch.rpm
+postgresql_yum_repository_base_url: "http://download.postgresql.org/pub/repos/{{ansible_pkg_mgr}}"
 # Map distributions to the release number of the pgdg package (https://yum.postgresql.org/repopackages.ph)
 postgresql_pgdg_release_map:
   RedHat:

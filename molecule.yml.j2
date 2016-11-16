@@ -1,5 +1,9 @@
 ---
 
+# This file will be converted to molecule.yml in .travis.yml.
+# TODO: have separate molecule.yml files per distribution.
+# TODO: move molecule stuff into tests/molecule/
+
 ansible:
   verbose: 'vvvv'
   group_vars:
@@ -41,7 +45,7 @@ driver:
   name: docker
 docker:
   containers:
-    # IMAGE_NAME, IMAGE_VERSION and ANSIBLE_GROUP will be replaced by sed.
+    # IMAGE_NAME, IMAGE_VERSION and ANSIBLE_GROUP will be replaced by jinja2.
     - name: ansible-role-postgresql
       image: {{IMAGE_NAME}}
       image_version: '{{IMAGE_VERSION}}'
@@ -49,6 +53,8 @@ docker:
       privileged: true
       volume_mounts:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      cap_add:
+        - SYS_ADMIN
       {% endif -%}
       ansible_groups:
         - {{ANSIBLE_GROUP}}
